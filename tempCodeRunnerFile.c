@@ -1,0 +1,1 @@
+Set the n-th bit of a number (make it 1).
