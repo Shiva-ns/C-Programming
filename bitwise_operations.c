@@ -153,7 +153,7 @@ int main()
 }
 #endif
 
-#if 1
+#if 0
 // Find the only non-repeating element in an array where every other element repeats twice.
 int main()
 {
@@ -180,9 +180,22 @@ int main()
 
 int main()
 {
-    int num;
-    printf("Enter the number: ");
-    scanf("%d", &num);
+    int arr[5] = {1, 5, 1, 6, 5};
+    for (int i = 0; i < 5; i++)
+    {
+        int c = 0;
+        for (int j = 0; j < 5; j++)
+        {
+            if (!(arr[i] ^ arr[j]))
+            {
+                c++;
+            }
+        }
+        if (c == 1)
+        {
+            printf("%d", arr[i]);
+        }
+    }
 }
 #endif
 
@@ -190,99 +203,183 @@ int main()
 
 int main()
 {
-    int num;
+    int arr[5] = {1, 5, 1, 6, 5};
+    int result = 0;
+    for (int i = 0; i < 6; i++)
+    {
+        result ^= arr[i];
+    }
+    printf("%d", result);
+}
+#endif
+
+#if 0
+// Reverse the bits of a 32-bit unsigned integer
+
+int main()
+{
+    unsigned int num;
     printf("Enter the number: ");
-    scanf("%d", &num);
+    scanf("%u", &num);
+
+    unsigned int res = 0;
+    for (int i = 0; i < 32; i++)
+    {
+        res = (res << 1) | (num & 1);
+        num = num >> 1;
+    }
+    printf("After reverse of number: %u\n", res);
+}
+#endif
+
+#if 0
+// Clear the lowest set bit of a number.
+int main()
+{
+    unsigned int num;
+    printf("Enter the number: ");
+    scanf("%u", &num);
+    /*int i = 0;
+    while (i <= 31)
+    {
+        if (num & (1 << i))
+        {
+            num = num & (~(1 << i));
+            break;
+        }
+        i++;
+    }*/
+    num = num & (num - 1);
+    printf("After clearing the LSB set bit: %u\n", num);
+}
+#endif
+
+#if 0
+// WAP to get 'n' bits of a given number
+int main()
+{
+    unsigned int num;
+    int n;
+    printf("Enter the number: ");
+    scanf("%u", &num);
+    printf("Enter the n bits: ");
+    scanf("%d", &n);
+    printf("the value of n bits of given number is : %u\n", (num & ((1 << n) - 1)));
+}
+#endif
+
+#if 0
+// WAP to toggle 'n' bits of a given number
+int main()
+{
+    unsigned int num;
+    int n;
+    printf("Enter the number: ");
+    scanf("%u", &num);
+    printf("Enter the n bits: ");
+    scanf("%d", &n);
+    printf("toggle 'n' bits of a given number is %u\n", (num ^ ((1 << n) - 1)));
+}
+#endif
+
+#if 0
+// WAP to replace 'n' bits of a given number
+
+int main()
+{
+    unsigned int num;
+    int n;
+    unsigned int val;
+    printf("Enter the num: ");
+    scanf("%u", &num);
+    printf("Enter the n: ");
+    scanf("%d", &n);
+    printf("Enter the val: ");
+    scanf("%u", &val);
+    printf("After replaced 'n' bits of a given number :  %u\n", (((num & (~((1 << n) - 1)))) | (val & ((1 << n) - 1))));
 }
 #endif
 
 #if 0
 
+int get_nbits_from_pos(int, int, int);
+
 int main()
 {
-    int num;
-    printf("Enter the number: ");
-    scanf("%d", &num);
+    int num, n, pos, res = 0;
+
+    printf("Enter num, n and val:");
+    scanf("%d%d%d", &num, &n, &pos);
+
+    res = get_nbits_from_pos(num, n, pos);
+
+    printf("Result = %d\n", res);
+}
+int get_nbits_from_pos(int num, int n, int pos)
+{
+    int r = (((num & ((1 << (pos + 1)) - 1))) >> ((pos + 1) - n));
+    // intr= (get n bits and mask from pos (should use pos + 1 for logic to get and mask)) >> (right swift bits to the zeroth pos)
+    return r; // retrun r value
+}
+#endif
+
+#if 0
+// toggle 'n' bits from given position of a number
+int main()
+{
+    int num, n, pos = 0;
+
+    printf("Enter num, n and val:");
+    scanf("%d%d%d", &num, &n, &pos);
+    n = (pos + 1) - n;
+    while (pos >= n)
+    {
+        num = num ^ (1 << n++);
+    }
+    printf("toggle 'n' bits from given position of a number : %d", num);
 }
 #endif
 
 #if 0
 
+// toggle 'n' bits from given position of a number
 int main()
 {
-    int num;
-    printf("Enter the number: ");
-    scanf("%d", &num);
+    int num, n, pos = 0;
+
+    printf("Enter num, n and val:");
+    scanf("%d%d%d", &num, &n, &pos);
+    int mask = ((1 << n) - 1) << (pos - n + 1);
+    num = num ^ mask;
+    printf("toggle 'n' bits from given position of a number : %d", num);
 }
 #endif
 
 #if 0
+// WAP to print 'n' bits from LSB of a number
 
 int main()
 {
     int num;
+    int n;
     printf("Enter the number: ");
     scanf("%d", &num);
-}
-#endif
-
-#if 0
-
-int main()
-{
-    int num;
-    printf("Enter the number: ");
-    scanf("%d", &num);
-}
-#endif
-
-#if 0
-
-int main()
-{
-    int num;
-    printf("Enter the number: ");
-    scanf("%d", &num);
-}
-#endif
-
-#if 0
-
-int main()
-{
-    int num;
-    printf("Enter the number: ");
-    scanf("%d", &num);
-}
-#endif
-
-#if 0
-
-int main()
-{
-    int num;
-    printf("Enter the number: ");
-    scanf("%d", &num);
-}
-#endif
-
-#if 0
-
-int main()
-{
-    int num;
-    printf("Enter the number: ");
-    scanf("%d", &num);
-}
-#endif
-
-#if 0
-
-int main()
-{
-    int num;
-    printf("Enter the number: ");
-    scanf("%d", &num);
+    printf("Enter the number of bits: ");
+    scanf("%d", &n);
+    int i = n-1;
+    printf("the n bits are : %d\n", i);
+    while (i >= 0)
+    {
+        if (num & (1 << i))
+        {
+            printf("1 ");
+        }
+        else
+        {
+            printf("0 ");
+        }
+        i--;
+    }
 }
 #endif
 
