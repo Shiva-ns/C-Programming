@@ -80,6 +80,11 @@ int insert_at_last(int val)
 }
 int delete_first()
 {
+    if (head == NULL)
+    {
+        printf("\nList is empty. Cannot delete.");
+        return 0;
+    }
     struct single *temp = head;
     head = temp->next;
     free(temp);
@@ -90,7 +95,14 @@ int delete_last()
 {
     if (head == NULL)
     {
-        printf("list is MT..");
+        printf("\nList is empty. Cannot delete.");
+        return 0;
+    }
+    if (head->next == NULL)
+    {
+        free(head);
+        head = NULL;
+        printf("\nDeleted at Last..");
         return 1;
     }
     struct single *temp = head;
@@ -128,10 +140,12 @@ int find_node(int val)
     if (flag)
     {
         printf("\nElement %d is present at node position %d\n", val, c);
+        return 1;
     }
     else
     {
         printf("\nElement %d is not there in the nodes..", val);
+        return 0;
     }
 }
 int delete_list()
