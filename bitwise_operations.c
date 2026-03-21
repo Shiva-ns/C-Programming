@@ -384,12 +384,93 @@ int main()
 #endif
 
 #if 0
+// WAP to implement Circular left shift
+int main()
+{
+    unsigned int num;
+    int n;
+    unsigned int res = 0;
+    printf("Enter the number: ");
+    scanf("%u", &num);
+    printf("Enter the n: ");
+    scanf("%d", &n);
+    res = (((num >> (32 - n))) | (num << n));
+    printf("After Circular left shifting : %u\n", res);
+}
+#endif
+
+#if 0
+// WAP to implement Circular right shift
 
 int main()
 {
-    int num;
+    unsigned int num;
+    int n;
     printf("Enter the number: ");
-    scanf("%d", &num);
+    scanf("%u", &num);
+    printf("Enter the n: ");
+    scanf("%d", &n);
+    printf("THE Circular right shift is : %u\n", (num >> n) | (num << (32 - n)));
+}
+#endif
+
+#if 0
+// bits swaping uisng toggle.
+#define BIT_SWAPING(num, i, j) ((num ^ (1 << i)) ^ (1 << j))
+int main()
+{
+    unsigned int num;
+    int i, j;
+    printf("Enter the number: ");
+    scanf("%u", &num);
+    printf("Enter the swaping bit positions: ");
+    scanf("%d", &i);
+    scanf("%d", &j);
+    printf("Before Bits Swap: %u\n", num);
+    if (((num >> i) & 1) != ((num >> j) & 1))
+    {
+        printf("After bits are swaping both bits are diff : %u", BIT_SWAPING(num, i, j));
+    }
+    else
+    {
+
+        printf("After Bit Swaping both bits are same:  %u\n", num);
+    }
+}
+#endif
+
+#if 0
+// nibble swaping
+int main()
+{
+    unsigned int num;
+
+    printf("Enter the number: ");
+    scanf("%u", &num);
+    printf("Before Nibble Swaping : %u", num);
+    printf("\nAfter Nibble Swaping : %u", ((num & 0x0f) << 4) | ((num & 0xf0) >> 4));
+}
+#endif
+
+#if 0
+// check whether the system is little or big endien system.
+
+int main()
+{
+    unsigned int num = 0x12345678;
+    unsigned char *p = (unsigned char *)&num;
+    if (p[0] == 0x12)
+    {
+        printf("It is and Big Endien\n");
+    }
+    else if (p[0] == 0x78)
+    {
+        printf("It is an little Endien\n");
+    }
+    else
+    {
+        printf("It is an unknown Endien\n");
+    }
 }
 #endif
 
@@ -397,9 +478,22 @@ int main()
 
 int main()
 {
-    int num;
+    unsigned int num;
     printf("Enter the number: ");
-    scanf("%d", &num);
+    scanf("%x", &num);
+    unsigned char *p = (unsigned char *)&num;
+    if (p[0] == 0x78)
+    {
+        printf("little endien. ");
+    }
+    else if (p[0] == 0x12)
+    {
+        printf("Big endiesn. ");
+    }
+    else
+    {
+        printf("Unknown.");
+    }
 }
 #endif
 
@@ -407,9 +501,10 @@ int main()
 
 int main()
 {
-    int num;
-    printf("Enter the number: ");
-    scanf("%d", &num);
+    unsigned int x = 0x12345678;
+    unsigned char *p = (unsigned char *)&x;
+    printf("the size of %d\n", sizeof(p[0]));
+    printf("p[0] = %x\np[1] = %x\np[2] = %x\n,p[3] = %x\n", p[0], p[1], p[2], p[3]);
 }
 #endif
 
@@ -417,59 +512,22 @@ int main()
 
 int main()
 {
-    int num;
-    printf("Enter the number: ");
-    scanf("%d", &num);
+    short y = 0x1234;
+    unsigned char *q = (unsigned char *)&y;
+    printf("p[0] = %x\np[1] = %x\n", q[0], q[1]);
 }
 #endif
 
-#if 0
+#if 1
 
 int main()
 {
-    int num;
-    printf("Enter the number: ");
-    scanf("%d", &num);
-}
-#endif
+    unsigned int x = 0x12345678;
+    unsigned char *p = (unsigned char *)&x;
 
-#if 0
-
-int main()
-{
-    int num;
-    printf("Enter the number: ");
-    scanf("%d", &num);
-}
-#endif
-
-#if 0
-
-int main()
-{
-    int num;
-    printf("Enter the number: ");
-    scanf("%d", &num);
-}
-#endif
-
-#if 0
-
-int main()
-{
-    int num;
-    printf("Enter the number: ");
-    scanf("%d", &num);
-}
-#endif
-
-#if 0
-
-int main()
-{
-    int num;
-    printf("Enter the number: ");
-    scanf("%d", &num);
+    // printf("%x\n", p[3]);
+    // unsigned int result = ((x & 0x000000FF) << 24) | ((x & 0xFF000000) >> 24) | ((x & 0x00FF0000) >> 8) | (((x & 0x0000FF00)) << 8);
+    // printf("%x\n", result);
 }
 #endif
 
