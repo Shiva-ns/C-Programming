@@ -75,11 +75,78 @@ int main()
 #endif
 
 #if 0
-
+#include <limits.h>
+// Find second largest element in array
+int main()
+{
+    int arr[5];
+    printf("Enter the array elements: ");
+    for (int i = 0; i < 5; i++)
+    {
+        scanf("%d", &arr[i]);
+    }
+    printf("The second largest in an array is : ");
+    int large = arr[0];
+    for (int i = 0; i < 5; i++)
+    {
+        if (large < arr[i])
+        {
+            large = arr[i];
+        }
+    }
+    int second = INT_MIN;
+    printf("The value of INT_MIN : %d", second);
+    for (int i = 0; i < 5; i++)
+    {
+        if (arr[i] != large && second < arr[i])
+        {
+            second = arr[i];
+        }
+    }
+    for (int i = 0; i < 5; i++)
+    {
+        printf("%d", arr[i]);
+    }
+    printf("\nthe second largest element in an array : %d", second);
+}
 #endif
 
 #if 0
-
+// Find second smallest element in array
+#include <limits.h>
+int main()
+{
+    int arr[5];
+    printf("Enter the array elements: ");
+    for (int i = 0; i < 5; i++)
+    {
+        scanf("%d", &arr[i]);
+    }
+    printf("The second smallest in an array is : ");
+    int small = arr[0];
+    for (int i = 0; i < 5; i++)
+    {
+        if (small > arr[i])
+        {
+            small = arr[i];
+        }
+    }
+    printf("\nthe smallest value in the array %d\n", small);
+    int second = INT_MAX;
+    // printf("The INT_MAX value: %d", second);
+    for (int i = 0; i < 5; i++)
+    {
+        if (arr[i] != small && second > arr[i])
+        {
+            second = arr[i];
+        }
+    }
+    for (int i = 0; i < 5; i++)
+    {
+        printf("%d", arr[i]);
+    }
+    printf("\nthe second smallest element in an array : %d", second);
+}
 #endif
 
 #if 0
