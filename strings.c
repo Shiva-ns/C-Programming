@@ -164,7 +164,8 @@ int main()
 #endif
 
 #if 1
-//Remove the vowels from a String
+// Remove the vowels from a String
+int 
 #endif
 
 #if 0

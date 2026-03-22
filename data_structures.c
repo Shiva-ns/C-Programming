@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#if 1
+#if 0
 #include <stdlib.h>
 /*Implement the functions given below :-
 1.insert_at_first(head, data)
