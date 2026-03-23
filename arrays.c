@@ -150,11 +150,87 @@ int main()
 #endif
 
 #if 0
+// Finding  Repeating elements in an Array
+int main()
+{
+    int arr[7];
+    printf("Enter the array elements: ");
+    for (int i = 0; i < 7; i++)
+    {
+        scanf("%d", &arr[i]);
+    }
+    // int d[] = {0};//buffer over flow
+    /*You declared d without an explicit size, initialized with one element {0}. This creates an array of size 1.
+   When you do d[inc++] = arr[j]; for the second or third duplicate found, you are writing to memory that doesn't belong to the array (Out of Bounds). This causes undefined behavior (crashes or variable corruption).*/
+    int d[7];
+    int flag = 0;
+    int inc = 0;
+    for (int i = 0; i < 7; i++)
+    {
+        for (int j = 0; j < 7; j++)
+        {
+            if (i != j)
+            {
+                if (arr[i] == arr[j])
+                {
+                    flag = 0;
+                        for (int k = 0; k < inc; k++)
+                        {
+                            if (arr[j] == d[k])
+                            {
+                                flag = 1;
+                                break;
+                            }
+                        }
+                    if (flag == 0)
+                    {
+                        d[inc++] = arr[j];
+                    }
+                }
+            }
+        }
+    }
+    printf("Finding Repeating elements : ");
+        for (int i = 0; i < inc; i++)
+        {
+            printf("%d ", d[i]);
+        }
+    return 0;
+}
 
 #endif
 
 #if 0
-
+// Finding Non Repeating elements in an Array
+int main()
+{
+    int arr[7];
+    printf("Enter the array elements: ");
+    for (int i = 0; i < 7; i++)
+    {
+        scanf("%d", &arr[i]);
+    }
+    int flag = 0;
+    printf("The non repeating Elements: ");
+    for (int i = 0; i < 7; i++)
+    {
+        flag = 0;
+        for (int j = 0; j < 7; j++)
+        {
+            if (i != j)
+            {
+                if (arr[i] == arr[j])
+                {
+                    flag = 1;
+                }
+            }
+        }
+        if (!flag)
+        {
+            printf("%d ", arr[i]);
+        }
+    }
+}
 #endif
 
 #if 0
