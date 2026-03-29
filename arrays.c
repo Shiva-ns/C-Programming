@@ -234,14 +234,127 @@ int main()
 #endif
 
 #if 0
+#include <limits.h>
+int main()
+{
+    int arr[5];
+    printf("Enter the elements: ");
+    for (int i = 0; i < 5; i++)
+    {
+        scanf("%d", &arr[i]);
+    }
+    int large = arr[0];
+    for (int i = 0; i < 5; i++)
+    {
+        if (large < arr[i])
+        {
+            large = arr[i];
+        }
+    }
+    int second = INT_MIN;
+
+    for (int i = 0; i < 5; i++)
+    {
+        if (arr[i] != large && second < arr[i])
+        {
+            second = arr[i];
+        }
+    }
+    printf("The first largest = %d\nThe seconf largest= %d\n", large, second);
+}
 
 #endif
 
 #if 0
-
+// Find smallest missing positive number in array
+int main()
+{
+    int arr[5];
+    printf("Enter the array elements: ");
+    for (int i = 0; i < 5; i++)
+    {
+        scanf("%d", &arr[i]);
+    }
+    printf("Positive numbers: ");
+    for (int i = 0; i < 5; i++)
+    {
+        if (arr[i] > 0)
+        {
+            printf("%d ", arr[i]);
+        }
+    }
+    int c = 0;
+    int miss = 0;
+    for (int i = 1; i <= 5; i++)
+    {
+        if (arr[i] > 0)
+        {
+            c = 0;
+            for (int j = 0; j < 5; j++)
+            {
+                if (i == arr[j])
+                {
+                    break;
+                }
+                c++;
+                if (c == 5)
+                {
+                    miss = i;
+                    // printf("\nThe smallest missing = %d\n", i);
+                }
+            }
+        }
+    }
+    if (miss)
+    {
+        printf("\nThe smallest missing = %d\n", miss);
+    }
+    else
+    {
+        printf("\nThe smallext missing = %d\n", arr[4] + 1);
+    }
+}
 #endif
 
 #if 0
+// Move negative elements to one side of array
+int main()
+{
+    int size;
+    printf("Enter the size of arr: ");
+    scanf("%d", &size);
+    int arr[size];
+    printf("Enter the array elements: ");
+    for (int i = 0; i < size; i++)
+    {
+        scanf("%d", &arr[i]);
+    }
+    printf("Before sepearting negative elements: ");
+    for (int i = 0; i < size; i++)
+    {
+        printf("%d ", arr[i]);
+    }
+    for (int i = 0; i < size / 2; i++)
+    {
+        if (arr[i] < 0)
+        {
+            for (int j = 0; j < size / 2; j++)
+            {
+                if (arr[size - j - 1] > 0)
+                {
+                    int t = arr[i];
+                    arr[i] = arr[size - j - 1];
+                    arr[size - j - 1] = t;
+                }
+            }
+        }
+    }
+    printf("\nAfter sepearting negative elements : ");
+    for (int i = 0; i < size; i++)
+    {
+        printf("%d ", arr[i]);
+    }
+}
 
 #endif
 

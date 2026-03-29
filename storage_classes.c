@@ -3,7 +3,7 @@
 #include <stdio.h>
 int main()
 {
-    int i = 0;
+    int i = 0; //local var
     printf("i % d\n", i);
     return 0;
 }
@@ -36,11 +36,16 @@ int main()
 #endif
 
 #if 0
+/*Possible outputs:
+
+Sometimes: *i 10
+Sometimes: garbage value (like *i 32765)
+Sometimes: segmentation fault (crash)*/
 int *foo()
 {
     int i = 10;
     int *j = &i;
-    return j;
+    return j; // foo() finishes → stack memory is destroyed, pointer becomes dangling pointer
 }
 int main()
 {
@@ -100,7 +105,7 @@ int book_ticket()
     int ticket_sold = 0;
     // static: stored in Data Segment. Initialized only once.
     // The variable and its value survive even after function returns.
-    static int ticket_sold = 0;
+    // static int ticket_sold = 0;
     ticket_sold++;
     return ticket_sold;
 }
@@ -156,7 +161,6 @@ int main()
     printf("i %d\n", i);
     return 0;
 }
-
 #endif
 
 #if 0
@@ -170,19 +174,20 @@ int main()
 
 #endif
 
-#if 1
-/*int main()
+#if 0
+int main()
 {
-    register int i = 10;
+    /*register int i = 10; //we can't access tegister var address
     register int *j = &i;
     printf("* j % d\n", *j);
-    int i = 10; // Must be in RAM (auto) to have an address
+    int i = 10; // Must be in RAM (auto) to have an address*/
 
     // It is valid to store the *pointer itself* in a register
+    /*int i = 10;
     register int *j = &i;
     printf("*j %d\n", *j);
-    return 0;
-}*/
+    return 0;*/
+}
 
 /*
 int main()
@@ -207,7 +212,7 @@ int main()
 #if 0
 int *foo()
 {
-    static int i = 10;
+    static int i = 10;//stores in data segment
     int *j = &i;
     return j;
 }
@@ -215,7 +220,7 @@ int main()
 {
     int *i;
     i = foo();
-    printf("The value from the returned pointer is: %d\n", *i);
+    printf("The value from the returned pointer is: %d\n", *i);//prints -  10
     return 0;
 }
 
@@ -242,7 +247,7 @@ int book_ticket()
 {
     // INITIALIZATION: Happens only ONCE at program startup (before main).
     // The line below is NOT executed as an assignment every time the function runs.
-    static int ticket_sold = 0; 
+    static int ticket_sold = 0; //data segment 
     ticket_sold++;
     return ticket_sold;
 }
@@ -291,7 +296,7 @@ int main()
 #if 0
 int foo()
 {
-    static int i;
+    static int i;//local or global default val is = 0 
     return i;
 }
 int main()
@@ -375,7 +380,8 @@ int main()
 
 #endif
 
-#if 0 // register int x; // ERROR: 'register' is not allowed for global variables.
+#if 0
+ // register int x; // ERROR: 'register' is not allowed for global variables.
 int x; // FIX: Use standard global variable (stored in Data Segment).
 int foo()
 {
@@ -438,7 +444,7 @@ int main()
 
 #endif
 
-#if 1
+#if 0
 // None Linkage – Local variables have “none” linkage
 /*External Linkage – A global variable declared without storage class has “external” linkage
 ● Internal Linkage – A global variable declared with static storage class has “internal” linkage*/
@@ -462,7 +468,7 @@ int main()
 
 #endif
 
-#if 1
+#if 0
 static int x = 10;
 // int x; // ERROR: Conflicting linkage. 'static' is Internal, 'int x' implies External.
 int foo()
@@ -478,7 +484,7 @@ int main()
 
 #endif
 
-#if 0
+#if 1
 
 #endif
 

@@ -96,6 +96,188 @@ int main()
 #endif
 
 #if 0
+#include <unistd.h>
+#include <stdio.h>
+int func_1();
+int num;
+int main()
+{
+    while (1)
+    {
+        num++;
+        func_1();
+        sleep(1);
+    }
+    return 0;
+}
+
+#endif
+
+#if 0
+#include <stdio.h>
+int main()
+{
+    int x;
+    {
+        int x = 10;
+        {
+            extern int x;//which force to get the data from global becauase used extern looks for the file-scope definition
+            printf("x % d\n", x);
+        }
+        printf("x % d\n", x);
+    }
+    printf("x % d\n", x);
+    return 0;
+}
+int x = 20;
+
+#endif
+
+#if 0
+#if 0
+#include <stdio.h>
+int main()
+{
+    extern char x; // Main issue: type mismatch between extern char x; and int x = 0x31; → same name, different types → compile‑time error or undefined behavior.
+    printf("x % c\n", x);
+    return 0;
+}
+int x = 0x31;
+#endif
+
+#if 0
+// corrected
+#include <stdio.h>
+
+extern int x; // or just rely on implicit external linkage for the definition below
+
+int main()
+{
+    printf("x = %c (%d)\n", (char)x, x); // explicitly cast to char
+    return 0;
+}
+
+int x = 0x31;
+#endif
+
+#endif
+
+#if 0
+#include <stdio.h>
+int main()
+{
+    int x;
+    {
+        int x = 10;
+        {
+            extern int x = 20;
+            /*Cannot combine extern with an initializer inside a block
+extern int x = 20; inside the inner block is not allowed in standard C.
+
+The C standard says that when extern is used in block scope, it can only be a declaration, not a definition.
+
+Writing extern int x = 20; means:
+
+extern → don’t allocate storage, just declare,
+
+= 20 → initialize, i.e., define → conflict.*/
+            printf("x % d\n", x);
+        }
+        printf("x % d\n", x);
+    }
+    printf("x % d\n", x);
+    return 0;
+}
+int x;
+
+#endif
+
+#if 0
+#include <stdio.h>
+int num;
+int func_1();
+int main()
+{
+    while (1)
+    {
+        num++;
+        func_1();
+    }
+    return 0;
+}
+
+#endif
+
+#if 0
+#include <stdio.h>
+int num;
+int func_2();
+int main()
+{
+    while (1)
+    {
+        num++;
+        func_2();
+    }
+    return 0;
+}
+
+#endif
+
+#if 0
+#include <stdio.h>
+#include <unistd.h>
+int num;
+int func_1();
+int main()
+{
+    while (1)
+    {
+        num++;
+        func_1();
+        sleep(1);
+    }
+    return 0;
+}
+
+#endif
+
+#if 0
+File 2:
+static int num;   // internal linkage (private to File 2)
+int num;          // external linkage (visible across files)
+
+#endif
+
+#if 0
+#include <stdio.h>
+int x = 20;
+int main()
+{
+    int x;
+    {
+        int x = 10;
+        {
+            extern int x;
+            printf("x % d\n", x);
+        }
+        printf("x % d\n", x);
+    }
+    printf("x % d\n", x);
+    return 0;
+}
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
 
 #endif
 
