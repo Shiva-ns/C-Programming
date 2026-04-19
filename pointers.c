@@ -363,62 +363,337 @@ int main()
 
 #endif
 
-#if 1
+#if 0
 // Write the function. Fill in the blank so that main() prints: a=7 b=3
 //  Write this function:
-void swap(/* your parameters */)
+void swap(int *p1, int *p2)
 {
-    /* your code */
+    *p1 = *p1 + *p2;
+    *p2 = *p1 - *p2;
+    *p1 = *p1 - *p2;
 }
-
 int main()
 {
     int a = 3, b = 7;
-    swap(/* your call */);
-    printf("a=%d  b=%d\n", a, b);
+    printf("Before Swap: \na=%d  b=%d\n", a, b);
+    swap(&a, &b);
+    printf("After Swap: \na=%d  b=%d\n", a, b);
     return 0;
 }
 
 #endif
 
 #if 0
+// Sum even and odd numbers in an array using a pointer
+// Ex: Input:  {1, 2, 3, 4, 5, 6}
+// Output: Even = 12, Odd = 9
+int even, odd;
+void sum(int *arr);
+int main()
+{
+    int arr[6] = {1, 2, 3, 4, 5, 6};
+    sum(arr);
+    printf("Even = %d, odd = %d\n", even, odd);
+}
+void sum(int *arr)
+{
+    for (int i = 0; i < 6; i++)
+    {
+        if (arr[i] % 2 == 0)
+        {
+            even = even + *(arr + i);
+        }
+        else
+        {
+            odd = odd + *(arr + i);
+        }
+    }
+}
+#endif
+
+#if 0
+// count even and odd numbers in an array using a pointer
+// Ex: Input:  {1, 2, 3, 4, 5, 6}
+// Output: Even = 2, Odd = 3
+int even, odd;//bss
+void count(int *arr);
+int main()
+{
+    int arr[6] = {1, 2, 3, 4, 5, 6};//stack
+    count(arr);//passing the address of arr[0]
+    printf("Even = %d, odd = %d\n", even, odd);
+}
+void count(int *arr)
+{
+    for (int i = 0; i < 6; i++)
+    {
+        if (arr[i] % 2 == 0)
+        {
+            even++;
+        }
+        else
+        {
+            odd++;
+        }
+    }
+}
 
 #endif
 
 #if 0
+/* Write a function that returns the sum of an array — pointer must be the only parameter (no length)
+Pass only a pointer and a sentinel value (-1) marks the end.
+Input:  {10, 20, 30, -1}
+Output: Sum = 60
+*/
+int suma(const int *arr);
+
+int main()
+{
+    int arr[5] = {10, 20, 30, -1};
+    int val = suma(arr);
+    printf("The sum of arr = %d\n", val);
+
+    return 0;
+}
+
+int suma(const int *arr)
+{
+    int sum = 0;
+    for (int i = 0; *(arr + i) != -1; i++)
+    {
+        sum += *(arr + i);
+    }
+    //*(arr + 0) = 13; // we cant do this becuase there in function parameter define with const
+    return sum;
+}
 
 #endif
 
 #if 0
+/*Find address difference between two elements in an array
+Subtract two pointers from the same array — explain what the result means (not bytes, but element count).
+cint arr[] = {10, 20, 30, 40, 50};
+int *p1 = &arr[1];
+int *p2 = &arr[4];*/
+int main()
+
+{
+    int arr[] = {10, 20, 30, 40, 50};
+    int *p1 = &arr[1];
+    int *p2 = &arr[4];
+    printf("Subtracting two pointers from the elements= %d\n", p2 - p1);
+    printf("Subtracting two pointers from the bytes differents= %d\n", (char *)p2 - (char *)p1);
+}
 
 #endif
 
 #if 0
+/*Write a function to find a value in an array and return its pointer — return NULL if not found
+Return type must be int *. Caller checks for NULL before dereferencing.
+Input:  arr={5,10,15,20}, find=15
+Output: pointer to element 15, *result = 15
+*/
+int *ret(const int *a, int size, int val);
+
+int main()
+{
+    int arr[] = {5, 10, 15, 20};
+    int find = 5;
+    int *result = ret(arr, 4, find);
+
+    if (result)
+    {
+        printf("The element is found and %d\n", *result);
+    }
+    else
+    {
+        printf("The element is not found ");
+    }
+    return 0;
+}
+
+int *ret(const int *a, int size, int val)
+{
+    for (int i = 0; i < size; i++)
+    {
+        if (*(a + i) == val)
+        {
+            return (int *)(a + i);
+        }
+    }
+    return NULL;
+}
+#endif
+
+#if 0
+/*Dynamically allocate a 1D array using double pointer, fill it, then free it
+int **pp holds the address of a pointer. Allocate the inner pointer first, then use it.
+Input:  size = 5, values = {1,2,3,4,5}
+Output: pp[0]=1, pp[1]=2 ... printed then freed*/
+int fun(int **arr, int size);
+#include <stdlib.h>
+int main()
+{
+    int size;
+    printf("size= ");
+    scanf("%d", &size);
+    int *arr = malloc(size * sizeof(int));
+    if (arr == NULL)
+    {
+        printf("Memory is not allocated\n");
+        return 0;
+    }
+    printf("values = ");
+    fun(&arr, size);
+    printf("pp[0]=%d, pp[1]=%d\n", *(arr + 0), *(arr + 1));
+    free(arr);
+}
+int fun(int **arr, int size)
+{
+    for (int i = 0; i < size; i++)
+    {
+        *(*arr + i) = i + 1;
+    }
+}
 
 #endif
 
 #if 0
+#include <stdlib.h>
+/*Write a function that modifies a pointer inside the function — caller must see the change
+If you pass int *p to a function and change p inside, caller sees nothing. You need int **pp.
+cvoid allocate(int **pp, int size);
+// After call: *pp points to newly allocated memory
+Input:  uninitialized pointer
+Output: pointer now points to allocated block of size 5*/
+void allocate(int **pp, int size);
+int main()
+{
+    int size;
+    printf("Enter the size of arr: ");
+    scanf("%d", &size);
+    int *ptr;
+    allocate(&ptr, size);
+    
+    if (ptr != NULL) {
+        printf("Memory allocated at: %p\n", (void*)ptr);
+        free(ptr);
+    }
+    return 0;
+}
+void allocate(int **pp, int size)
+{
+    *pp = malloc(size * sizeof(int));
+    if (*pp == NULL)
+    {
+        printf("Memory is not allocated\n");
+    }
+}
+#endif
+
+#if 0
+/*Allocate a 2D array dynamically using int **, fill with row×col values, print, free
+Row-by-row heap allocation — each row is a separately allocated array.
+Input:  rows=3, cols=3
+Output:
+1 2 3
+4 5 6
+7 8 9
+
+Interviewer checks: loop-allocated rows, loop-freed rows, understanding that int[3][3] and int** are NOT the same.*/
+#include <stdlib.h>
+int main()
+{
+    int row;
+    int col;
+    printf("Enter the row and col sizes: ");
+    scanf("%d", &row);
+    scanf("%d", &col);
+    int **ptr = malloc(row * sizeof(int *));
+    if (ptr == NULL)
+    {
+        printf("Memory is not allocated: ");
+        return 0;
+    }
+    for (int i = 0; i < row; i++)
+    {
+        ptr[i] = malloc(col * sizeof(int));
+    }
+    int val = 1;
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < col; j++)
+        {
+            (*(*(ptr + i) + j)) = val++;
+        }
+    }
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < col; j++)
+        {
+            printf("%d ", (*(*(ptr + i) + j)));
+        }
+        printf("\n");
+    }
+    free(ptr);
+    return 0;
+}
 
 #endif
 
 #if 0
+/*Sort an array of strings alphabetically using char **
+Each char * points to a string. Use char ** to hold the array. Sort by swapping pointers, not string contents.
+Input:  {"banana", "apple", "cherry"}
+Output: {"apple", "banana", "cherry"}
+
+Interviewer checks: you swap pointers (cheap), not strcpy (expensive). strcmp for comparison.*/
 
 #endif
 
 #if 0
+/*W.A.P to print menu and select an option
+– Menu options { File, Edit, View, Insert, Help }
+The prototype of print_menu function
+– void print_menu (char **menu);
 
-#endif
+user@user:~]
+user@user:~]./a.out
+1. File
+2. Edit
+3. View
+4. Insert
+5. Help
+Select your option: 2
+You have selected Edit Menu
+user@user:~]
+*/
+void print_menu(char **menu)
+{
+    int choice;
+    // Dynamically print the menu based on the array contents
+    for (int i = 0; i < 5; i++)
+    {
+        printf("%d. %s\n", i + 1, menu[i]);
+    }
 
-#if 0
-
-#endif
-
-#if 0
-
-#endif
-
-#if 0
-
+    printf("Select your option: ");
+    if (scanf("%d", &choice) == 1 && choice >= 1 && choice <= 5)
+    {
+        printf("You have selected %s Menu\n", menu[choice - 1]);
+    }
+    else
+    {
+        printf("Invalid option selected.\n");
+    }
+}
+int main()
+{
+    char *menu[5] = {"File", "Edit", "View", "Insert", "Help"};
+    print_menu(menu);
+    return 0;
+}
 #endif
 
 #if 0

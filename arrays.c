@@ -359,10 +359,87 @@ int main()
 #endif
 
 #if 0
+// Counting Distinct Elements in an Array
 
+int main()
+{
+    int size;
+    printf("Enter the size of arr: ");
+    scanf("%d", &size);
+    int arr[size];
+    printf("Enter the Array Elemnts: ");
+    for (int i = 0; i < size; i++)
+    {
+        scanf("%d", &arr[i]);
+    }
+    int flag = 1;
+    int count = 0;
+    for (int i = 0; i < size; i++)
+    {
+        flag = 1;
+        for (int j = i + 1; j < size; j++)
+        {
+            if (arr[i] == arr[j])
+            {
+                flag = 0;
+            }
+        }
+        if (flag)
+        {
+            count++;
+        }
+    }
+    printf("Counting Distinct Elements in an Array is : %d\n", count);
+}
 #endif
 
 #if 0
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+#include <stdio.h>
+#include <stdlib.h>
+int *twoSum(int *nums, int numsSize, int target, int *returnSize)
+{
+    int k = 0;
+    for (int i = 0; i < numsSize; i++)
+    {
+        for (int j = 0; j < numsSize; j++)
+        {
+            if (i != j)
+            {
+                if (((*(nums + i)) + (*(nums + j))) == target)
+                {
+                    *(returnSize + k++) = i;
+                    *(returnSize + k) = j;
+                    return returnSize;
+                }
+            }
+        }
+    }
+}
+
+int main()
+{
+    int size = 4;
+    int target;
+    int nums[size];
+    printf("nums=");
+    for (int i = 0; i < size; i++)
+    {
+        scanf("%d", &nums[i]);
+    }
+    printf("target = ");
+    scanf("%d", &target);
+    int returnsize[2];
+    int *sum = twoSum(nums, size, target, returnsize);
+
+    printf("Output ");
+    for (int i = 0; i < 2; i++)
+    {
+        printf("%d ", sum[i]);
+    }
+}
 
 #endif
 

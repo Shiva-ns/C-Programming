@@ -269,11 +269,156 @@ int main()
 #endif
 
 #if 0
+/*107. [P]
+Write a program to create a struct Employee with nested struct Address. Dynamically allocate an array of 5
+employees and sort them by salary.*/
+#include <stdlib.h>
+#include <stdio.h>
+
+struct Address
+{
+
+    char add[50];
+    char state[20];
+    int pin;
+};
+
+struct Employee
+{
+    int id;
+    char name[40];
+    float salary;
+    struct Address addr;
+};
+void swap_salary(struct Employee *empp, int size)
+{
+    struct Employee temp;
+
+    for (int i = 0; i < 5; i++)
+    {
+        for (int j = i + 1; j < 5; j++)
+        {
+            if (empp[i].salary > empp[j].salary)
+            {
+                temp = empp[i];
+                empp[i] = empp[j];
+                empp[j] = temp;
+            }
+        }
+    }
+}
+int main()
+{
+    struct Employee *emp;
+    emp = (struct Employee *)malloc(5 * sizeof(struct Employee));
+    if (emp == NULL)
+    {
+        fprintf(stderr, "Memory allocation failed\n");
+        return 1;
+    }
+
+    for (int i = 0; i < 5; i++)
+    {
+        printf("Enter the details of employee - %d\n", i + 1);
+        printf("ID ");
+        scanf("%d", &emp[i].id);
+        printf("Name ");
+        scanf("%s", emp[i].name);
+        printf("Salary ");
+        scanf("%f", &emp[i].salary);
+        printf("Address ");
+        scanf("%s", emp[i].addr.add);
+        printf("State ");
+        scanf("%s", emp[i].addr.state);
+        printf("Pin ");
+        scanf("%d", &emp[i].addr.pin);
+    }
+    printf("\n");
+    printf("Before swaping : ");
+    for (int i = 0; i < 5; i++)
+    {
+        printf("the details of employee - %d\n", i + 1);
+        printf("ID %d\n", emp[i].id);
+        printf("Name %s\n", emp[i].name);
+        printf("Salary %f\n", emp[i].salary);
+        printf("Address %s\n", emp[i].addr.add);
+        printf("State %s\n", emp[i].addr.state);
+        printf("Pin %d\n", emp[i].addr.pin);
+        printf("\n");
+    }
+    swap_salary(emp, 5);
+    printf("\n");
+    printf("After swaping : ");
+    for (int i = 0; i < 5; i++)
+    {
+        printf("the details of employee - %d\n", i + 1);
+        printf("ID %d\n", emp[i].id);
+        printf("Name %s\n", emp[i].name);
+        printf("Salary %f\n", emp[i].salary);
+        printf("Address %s\n", emp[i].addr.add);
+        printf("State %s\n", emp[i].addr.state);
+        printf("Pin %d\n", emp[i].addr.pin);
+        printf("\n");
+    }
+    free(emp);
+    return 0;
+}
 
 #endif
 
 #if 0
+/*Create a structure Book:
 
+title
+price
+
+👉 Find the costliest book.*/
+struct book
+{
+    char title[50];
+    int price;
+};
+struct book costliest_book(struct book *b, int s);
+int main()
+{
+    struct book books[5];
+    printf("Enter the books name:\n");
+    for (int i = 0; i < 5; i++)
+    {
+        printf("Book %d", i + 1);
+        printf("Title: ");
+        scanf("%s", books[i].title);
+        printf("Prince: ");
+        scanf("%d", &books[i].price);
+    }
+    printf("\n");
+    for (int i = 0; i < 5; i++)
+    {
+        printf("Book%d\n", i + 1);
+        printf("Title: %s", books[i].title);
+        printf("\nPrince: %d", books[i].price);
+        printf("\n");
+    }
+    printf(" the costliest book is %s\n", (costliest_book(books, 5)).title);
+    // printf("Cost %d",(costliest_book(books, 5)).title);
+}
+
+struct book costliest_book(struct book *b, int s)
+{
+    struct book temp;
+    int high = b[0].price;
+    int index = 0;
+    int i;
+    for (i = 0; i < s; i++)
+    {
+        if (high < b[i].price)
+        {
+            temp = b[i];
+            index = i;
+        }
+    }
+    return b[index];
+}
 #endif
 
 #if 0
