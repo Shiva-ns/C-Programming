@@ -155,7 +155,7 @@ int main()
 // second larget number in the array
 int main()
 {
-    int arr[5] = {3, 2, 5, 7, 8};
+    int arr[5] = {8, 2, 9, 7, 1};
     int l = 0;
     int sec_l = 0;
     for (int i = 0; i < 5; i++)

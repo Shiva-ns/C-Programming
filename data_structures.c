@@ -383,7 +383,7 @@ int sorted()
         j = i->link;
         while (j != NULL)
         {
-            if (i->data < j->data)
+            if (i->data > j->data)
             {
                 int t = i->data;
                 i->data = j->data;
@@ -509,6 +509,385 @@ int main()
         }
     }
 }
+
+#endif
+
+#if 0
+#include <stdlib.h>
+#include <stdio.h>
+// merge 2 lists
+struct merge
+{
+    int data;
+    struct merge *next;
+};
+struct merge *h1 = NULL;
+struct merge *h2 = NULL;
+struct merge *m = NULL;
+
+int insert(int val)
+{
+    struct merge *node = malloc(sizeof(struct merge));
+    if (node == NULL)
+    {
+        printf("The node is not created.\n");
+    }
+    node->data = val;
+    node->next = NULL;
+    if (h1 == NULL)
+    {
+        h1 = node;
+        return 1;
+    }
+    struct merge *t = h1;
+    while (t->next != NULL)
+    {
+        t = t->next;
+    }
+    t->next = node;
+    return 1;
+}
+int iinsert(int val)
+{
+    struct merge *node = malloc(sizeof(struct merge));
+    if (node == NULL)
+    {
+        printf("The node is not created.\n");
+    }
+    node->data = val;
+    node->next = NULL;
+    if (h2 == NULL)
+    {
+        h2 = node;
+        return 1;
+    }
+    struct merge *t = h2;
+    while (t->next != NULL)
+    {
+        t = t->next;
+    }
+    t->next = node;
+    return 1;
+}
+int print()
+{
+    printf("List1\n");
+    struct merge *t = h1;
+    while (t != NULL)
+    {
+        printf("%d -> ", t->data);
+        t = t->next;
+    }
+
+    printf("\nlist 2\n");
+    t = h2;
+    while (t != NULL)
+    {
+        printf("%d -> ", t->data);
+        t = t->next;
+    }
+}
+int merg()
+{
+    struct merge *node = malloc(sizeof(struct merge));
+    if (node == NULL)
+    {
+        printf("Memory is not created.");
+        return 0;
+    }
+    if (m == NULL)
+    {
+        m = h1;
+    }
+    struct merge *t = m;
+    while (t->next != NULL)
+    {
+        t = t->next;
+    }
+    t->next = h2;
+    t = m;
+    while (t != NULL)
+    {
+        printf("%d ", t->data);
+        t = t->next;
+    }
+}
+int main()
+{
+    insert(1);
+    insert(2);
+    insert(3);
+    insert(4);
+    insert(5);
+    insert(6);
+    // print();
+    iinsert(7);
+    iinsert(8);
+    iinsert(9);
+    iinsert(10);
+    iinsert(11);
+    iinsert(12);
+    print();
+
+    printf("\nAfter Merging :\n");
+    merg();
+}
+
+#endif
+
+#if 0
+#include <stdlib.h>
+#include <stdio.h>
+// merge 2 lists
+struct merge
+{
+    int data;
+    struct merge *next;
+};
+
+struct merge *h1 = NULL;
+struct merge *h2 = NULL;
+
+/**
+ * Optimized insert: O(1) Time Complexity.
+ * By passing the 'tail' pointer, we append nodes instantly without
+ * traversing the entire list from the head every time.
+ */
+struct merge *insert_node(struct merge **head, struct merge *tail, int val)
+{
+    struct merge *node = malloc(sizeof(struct merge));
+    if (!node)
+        return NULL; // Safety check for memory allocation
+
+    node->data = val;
+    node->next = NULL;
+
+    if (*head == NULL)
+    {
+        *head = node; // First node becomes the head
+    }
+    else
+    {
+        tail->next = node; // Link new node to the current tail
+    }
+    return node; // Return the new node to be used as the next 'tail'
+}
+
+/**
+ * Display logic: O(N) Time Complexity.
+ */
+void print_list(struct merge *head, const char *msg)
+{
+    printf("%s: ", msg);
+    while (head)
+    {
+        // Using ternary operator for clean arrow formatting
+        printf("%d%s", head->data, head->next ? " -> " : " -> NULL\n");
+        head = head->next;
+    }
+}
+
+/**
+ * Merging logic: O(N) Time Complexity.
+ * We traverse only the first list to find the connection point.
+ * Optimization: If we stored the tail of h1, this could be O(1).
+ */
+struct merge *merge_lists(struct merge *list1, struct merge *list2)
+{
+    if (!list1)
+        return list2; // If list1 is empty, result is list2
+    if (!list2)
+        return list1; // If list2 is empty, result is list1
+
+    struct merge *temp = list1;
+    while (temp->next)
+    {
+        temp = temp->next;
+    }
+    temp->next = list2;
+    return list1;
+}
+
+/**
+ * Memory Cleanup: O(N + M) Time Complexity.
+ */
+void free_list(struct merge *head)
+{
+    struct merge *temp;
+    while (head)
+    {
+        temp = head;
+        head = head->next;
+        free(temp);
+    }
+}
+
+int main()
+{
+    // t1 and t2 act as trackers for the end of our lists (tails)
+    struct merge *t1 = NULL, *t2 = NULL;
+
+    // Efficiently build List 1: 1 to 6.
+    // This loop is O(N) total because each insertion is O(1).
+    for (int i = 1; i <= 6; i++)
+    {
+        t1 = insert_node(&h1, t1, i);
+    }
+
+    // Efficiently build List 2: 7 to 12.
+    // This loop is O(M) total.
+    for (int i = 7; i <= 12; i++)
+    {
+        t2 = insert_node(&h2, t2, i);
+    }
+
+    print_list(h1, "List 1");
+    print_list(h2, "List 2");
+
+    printf("\nMerging lists...\n");
+    struct merge *merged_head = merge_lists(h1, h2);
+
+    print_list(merged_head, "Merged List"); // O(N + M)
+
+    // Essential for production code: clean up heap memory
+    free_list(merged_head);
+    return 0;
+}
+#endif
+
+#if 0
+int len = 5;
+int arr[5];
+int top = -1;
+int push(int val)
+{
+    if (top == len - 1) // Corrected: Stack is full when top points to the last valid index
+    {
+        printf("Stack Overflow: Cannot push %d\n", val);
+        return 0; // Indicate failure
+    }
+
+    top++; // Increment top first, then assign
+    arr[top] = val;
+    printf("Pushed: %d\n", val); // Added print for clarity
+    return 1;                    // Indicate success
+}
+int peek()
+{
+    if (top == -1)
+    {
+        printf("Stack Empty: Cannot peek.\n");
+        return -1; // Indicate an error or empty stack
+    }
+    printf("Top element: %d\n", arr[top]);
+    return arr[top]; // Return the top element
+}
+int pop()
+{
+    if (top == -1)
+    {
+        printf("Stack Empty: Cannot pop.\n");
+        return -1; // Indicate an error or empty stack
+    }
+    int popped_val = arr[top];          // Get the value before decrementing
+    top--;                              // Decrement top
+    printf("Popped: %d\n", popped_val); // Added print for clarity
+    return popped_val;                  // Return the popped element
+}
+int print_stack_elements()
+{
+    printf("Stack elements (bottom to top): "); // Clarified output
+    if (top == -1)
+    {
+        printf("Stack is Empty.\n");
+        return 0; // Indicate no elements printed
+    }
+    for (int i = 0; i <= top; i++)
+    {
+        printf("%d ", arr[i]);
+    }
+    printf("\n"); // Newline for cleaner output
+    return 1;     // Indicate success
+}
+int main()
+{
+    push(3);
+    push(2);
+    push(4);
+    push(6);
+    push(1); // Stack is now full (5 elements)
+
+    print_stack_elements();
+    peek();
+    pop();
+    pop();
+    print_stack_elements();
+
+    printf("\n--- Testing overflow ---\n");
+    push(99); // This should now correctly trigger the overflow message
+
+    printf("\n--- Testing peek after some pops ---\n");
+    peek();
+
+    printf("\n--- Popping remaining elements ---\n");
+    pop();
+    pop();
+    pop();
+    pop(); // Pop all elements
+
+    print_stack_elements(); // Should now correctly print "Stack is Empty."
+
+    printf("\n--- Testing pop from empty stack ---\n");
+    pop(); // Should print "Stack Empty"
+
+    printf("\n--- Testing peek from empty stack ---\n");
+    peek(); // Should print "Stack Empty"
+
+    print_stack_elements(); // Should print "Stack is Empty."
+}
+#endif
+
+#if 0
+int main()
+{
+    for (int i = 0; i < 5; i++)
+    {
+        printf("%d ", i);
+    }
+    printf("\n");
+    return 0;
+}
+
+#endif
+
+#if 1
+//stack implementation with array
+
+
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
 
 #endif
 

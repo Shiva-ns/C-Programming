@@ -8,7 +8,7 @@ Key Concepts of Unions
 3.Use Case: Unions are typically used for memory conservation or for interpreting the same bit pattern in multiple ways (e.g., hardware registers or network packets).
 
 #endif
-#if 1
+#if 0
 union Test
 {
     char option;
@@ -59,7 +59,31 @@ int main()
 
 #endif
 
-#if 0
+#if 1
+// Access register as whole or individual bits:
+#include <stdio.h>
+typedef union
+{
+    unsigned int whole; // full 32 bit register
+    struct
+    {
+        unsigned int rx_ready : 1;
+        unsigned int tx_ready : 1;
+        unsigned int error : 1;
+        unsigned int reserved : 29;
+    } bits;
+} StatusRegister;
+int main()
+{
+    StatusRegister reg;
+    reg.whole = 0; // clear all bits
+
+    reg.bits.rx_ready = 1; // set individual bit
+    reg.bits.tx_ready = 1;
+
+    printf("Register: %u\n", reg.whole);         // full value
+    printf("RX ready: %d\n", reg.bits.rx_ready); // individual bit
+}
 
 #endif
 

@@ -154,3 +154,32 @@ int main()
 }
 
 #endif
+
+#if 0
+#include <stdio.h>
+int main()
+{
+    int a = 0x12345678;
+    printf("Hex : %X\n", a);
+    printf("Decimal : %d\n", a);
+    printf("Octal : %o\n", a);
+    return 0;
+}
+#endif
+
+#if 0
+#include <stdio.h>
+int main()
+{
+    int a = 0x12345678;
+    unsigned char *ptr = (unsigned char *)&a;
+    printf("Hex : %X\n", ptr[0]);
+    printf("Decimal : %d\n", ptr[0]);
+    printf("Octal : %o\n", ptr[0]);
+    return 0;
+}
+#endif
+
+#if 0
+
+#endif

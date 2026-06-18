@@ -414,6 +414,333 @@ int main()
 #endif
 
 #if 0
+#include <stdio.h>
+void sayhello()
+{
+    printf("Hello world\n");
+}
+int main()
+{
+    void (*fptr)() = sayhello;
+    fptr();
+    return 0;
+}
+#endif
+
+#if 0
+#include <stdio.h>
+void square(int x)
+{
+    printf("The square: %d\n", x * x);
+}
+void cube(int x)
+{
+    printf("The cube: %d\n", x * x * x);
+}
+int main()
+{
+    void (*fptr)(int);
+    fptr = square;
+    fptr(5);
+    fptr = cube;
+    fptr(3);
+    return 0;
+}
+
+#endif
+
+#if 1
+int add()
+{
+}
+int sub()
+{
+}
+int mul()
+{
+}
+int main()
+{
+    int (*fptr[3])(int, int) = {add, sub, mul};
+    for(){
+        
+    }
+}
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
+
+#endif
+
+#if 0
 
 #endif
 

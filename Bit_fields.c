@@ -48,10 +48,76 @@ int main()
 #endif
 
 #if 0
+/*21.
+
+Create:
+
+struct Status {
+    unsigned int a:1;
+    unsigned int b:2;
+    unsigned int c:3;
+};
+
+👉 Print size and assign values*/
+struct Status // Text Segment: Blueprint (0 bytes)
+{
+    unsigned int a : 1; // Packed into bits 0
+    unsigned int b : 2; // Packed into bits 1-2
+    unsigned int c : 3; // Packed into bits 3-5
+}; // Total size: 4 bytes (1 int storage unit)
+
+int main() // Text Segment (Machine Instructions)
+{
+    printf("The size of struct bitfeilds: %zu\n", sizeof(struct Status)); // Text: RO Literal
+    struct Status bt;                                                     // Stack Segment: 4 bytes
+    printf("The size of Var: %zu\n", sizeof(bt));                         // Text: RO Literal
+
+    bt.a = 1; // Modifies bits in Stack memory
+    bt.b = 3; // Modifies bits in Stack memory
+    bt.c = 7; // Modifies bits in Stack memory
+
+    /* // attempting to store values that are larger than the bit-widths you defined in the struct Status.
+     bt.a = 2; // which not stores The Error: Bit-field Overflow (Truncation)
+     bt.b = 4; // which not stores The Error: Bit-field Overflow (Truncation)
+     bt.c = 8; // which not stores The Error: Bit-field Overflow (Truncation)
+     */
+
+    printf("a = %u\n", bt.a); // Reads from Stack
+    printf("b = %u\n", bt.b); // Reads from Stack
+    printf("c = %u\n", bt.c); // Reads from Stack
+    return 0;
+}
 
 #endif
 
 #if 0
+/*Store flags using bit-fields:
+power_on (1 bit)
+error (1 bit)
+mode (2 bits)*/
+#include <stdio.h>
+
+struct Status
+{
+    unsigned int power_on : 1;
+    unsigned int error : 1;
+    unsigned int mode : 2;
+};
+
+int main()
+{
+    struct Status s;
+
+    s.power_on = 1;
+    s.error = 0;
+    s.mode = 3;
+
+    printf("Power: %d\n", s.power_on);
+    printf("Error: %d\n", s.error);
+    printf("Mode: %d\n", s.mode);
+
+    return 0;
+}
 
 #endif
 

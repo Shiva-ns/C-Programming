@@ -1,1 +1,0 @@
-// File handling in C allows you to create, read, write, and manipulate files stored on disk. It's done through a set of standard library functions defined in <stdio.h>.

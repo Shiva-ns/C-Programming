@@ -542,11 +542,59 @@ int main()
 #endif
 
 #if 0
+// Search an element in a matrix
+int Search_an_element(int r, int c, int arr[r][c], int val);
+#include <stdio.h>
+int main()
+{
+    int row;
+    int col;
+    printf("Enter the row and col size: ");
+    scanf("%d", &row);
+    scanf("%d", &col);
+    int arr[row][col];
+    printf("Enter the matrix elements:\n");
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < col; j++)
+        {
+            scanf("%d", &arr[i][j]);
+        }
+    }
+    printf("print the matrix\n");
 
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < col; j++)
+        {
+            printf("%d ", arr[i][j]);
+        }
+        printf("\n");
+    }
+    printf("Enter the Elements: ");
+    int val;
+    scanf("%d", &val);
+    printf("The target: %d\n", Search_an_element(row, col, arr, val));
+}
+
+int Search_an_element(int r, int c, int arr[r][c], int val)
+{
+    for (int i = 0; i < r; i++)
+    {
+        for (int j = 0; j < c; j++)
+        {
+            if (arr[i][j] == val)
+            {
+                return val;
+            }
+        }
+    }
+    return 0;
+}
 
 #endif
 
-#if 0
+#if 1
 
 #endif
 

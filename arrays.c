@@ -444,10 +444,105 @@ int main()
 #endif
 
 #if 0
+int main()
+{
+    int size = 3;
+    int arr1[size];
+    int arr2[size];
+    printf("Enter the elements of array 1 and array 2:");
+    printf("Array1: ");
+    for (int i = 0; i < size; i++)
+    {
+        scanf("%d", &arr1[i]);
+    }
+    printf("Array2: ");
+    for (int i = 0; i < size; i++)
+    {
+        scanf("%d", &arr2[i]);
+    }
+    printf("\nArray1: ");
+    for (int i = 0; i < size; i++)
+    {
+        printf("%d ", arr1[i]);
+    }
+    printf("\nArray2: ");
+    for (int i = 0; i < size; i++)
+    {
+        printf("%d ", arr2[i]);
+    }
+    int flag = 0;
+    for (int i = 0; i < size; i++)
+    {
+        flag = 0;
+        for (int j = 0; j < size; j++)
+        {
+            if (arr1[i] == arr2[j])
+            {
+                flag = 1;
+                break;
+            }
+        }
+        if (flag)
+        {
+            printf("\nDisjoint (True) shares common element is : %d\n", arr1[i]);
+            break;
+        }
+    }
+    if (!flag)
+    {
+        printf("\nDisjoint (True)");
+    }
+}
 
 #endif
 
 #if 0
+// Finding Arrays are disjoint or not
+
+int main()
+{
+    int size;
+
+    printf("Enter the size of the arrays:");
+    scanf("%d", &size);
+    int arr1[size];
+    int arr2[size];
+    printf("Enetr the array - 1 elements: ");
+    for (int i = 0; i < size; i++)
+    {
+        scanf("%d", &arr1[i]);
+    }
+    printf("Enetr the array - 2 elements: ");
+    for (int i = 0; i < size; i++)
+    {
+        scanf("%d", &arr2[i]);
+    }
+    int flag = 0;
+    for (int i = 0; i < size; i++)
+    {
+
+        for (int j = 0; j < size; j++)
+        {
+            if (arr1[i] == arr2[j])
+            {
+                flag = 1;
+                break;
+            }
+        }
+        if (flag)
+        {
+            break;
+        }
+    }
+    if (flag)
+    {
+        printf("disjoint\n");
+    }
+    else
+    {
+        printf("Not disjoint\n");
+    }
+}
 
 #endif
 
